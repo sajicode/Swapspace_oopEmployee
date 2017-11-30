@@ -1,58 +1,53 @@
-<?php    #hourlyEmployee class
+<?php    #hourly_employee class
 
-    class HourlyEmployee extends Employee
+    class HourlyEmployee extends Employee implements iCalculateSalary
     {
-        private $_hourSpent;
+        const OVERTIME = 5000;
 
-        private $_rate;
+        const MAX_WEEK_HOUR = 40;
 
-        private $_money;
+        private $_hoursSpent;
 
-        private $_cash;
+        private $_hourlyRate;
 
+        private $_overtimeSalary;
+
+        private $_salary;
         
 
         /*@override*/
-        public function __construct($name, $gender, $hourSpent, $rate) {
+        public function __construct($name, $gender, $hoursSpent, $hourlyRate) {
 
             $this->_type = "Hourly Employee";
-            $this->_status = "Part-time";
+            $this->_status = "Contracted Staff";
             $this->_name = $name;
             $this->_gender = $gender;
-            $this->_hourSpent = $hourSpent;
-            $this->_rate = $rate;
-            $this->_money = $money;
-            $this->_cash = $cash;
-
+            $this->_hoursSpent = $hoursSpent;
+            $this->_hourlyRate = $hourlyRate;
+           
 
 
         }
 
-        public function getHourSpent() {
-            return $this->_hourSpent;
+        public function getHoursSpent() {
+            return $this->_hoursSpent;
         }
 
-        public function getRate() {
-            return $this->_rate;
+        public function getHourlyRate() {
+            return $this->_hourlyRate;
         }
 
-        public function getMoney() {
-            return $this->_money;
-        }
+        
 
-        public function getCash() {
-            return $this->_cash;
-        }
 
-        public function calculateIncome($hourSpent,$rate) {
-            if($hourSpent > 40) {
+        public function calculateSalary() {
+            if($this->_hoursSpent > 40) {
 
-                define("OVERTIME", 1000);
 
-                return $this->_cash = ($hourSpent * $rate) + OVERTIME;
+                return $this->_overtimeSalary = ($this->_hourlyRate * HourlyEmployee::MAX_WEEK_HOUR) + HourlyEmployee::OVERTIME;
             }
 
-            return $this->_money = $hourSpent * $rate;
+            return $this->_salary = $this->_hoursSpent * $this->_hourlyRate;
         }
 
         public function getProfile() {
@@ -62,9 +57,10 @@
             echo '<li> Gender: '.$this->getGender().'</li>';
             echo '<li> Type: '.$this->getType().'</li>';
             echo '<li> Status: '.$this->getStatus().'</li>';
-            echo '<li> Hours Spent: '.$this->getHourSpent().'</li>';
-            echo '<li> Rate: '.$this->getRate().'</li>';
-            echo '<li> Income: '.$this->getMoney().$this->getCash().'</li>';
+            echo '<li> Maximum Weekly Hours: '.HourlyEmployee::MAX_WEEK_HOUR.'</li>';
+            echo '<li> Hours Spent: '.$this->getHoursSpent().'</li>';
+            echo '<li> Rate: '.$this->getHourlyRate().'</li>';
+            echo '<li> Salary: '.$this->calculateSalary().'</li>';
 
 
 

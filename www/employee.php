@@ -1,4 +1,4 @@
-<?php
+<?php   #employee class
 
     abstract class Employee
     {

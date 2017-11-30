@@ -2,23 +2,25 @@
 
     class SalaryEmployee extends Employee
     {
+    	private $_salary;
 
-        private $income;
+        private $_percentage;
 
         /*@override*/
-        public function __construct($name, $gender, $income) {
+        public function __construct($name, $gender, $salary) {
 
             $this->_type = "Salary Employee";
-            $this->_status = "Full-time";
+            $this->_status = "Full-time Staff";
             $this->_name = $name;
             $this->_gender = $gender;
-            $this->_income = $income;
+            $this->_salary = $salary;
 
         }
 
-        public function getIncome() {
-            return $this->_income;
+        public function getSalary() {
+        	return $this->_salary;
         }
+
 
         public function getProfile() {
             echo '<ul>';
@@ -27,7 +29,8 @@
             echo '<li> Gender: '.$this->getGender().'</li>';
             echo '<li> Type: '.$this->getType().'</li>';
             echo '<li> Status: '.$this->getStatus().'</li>';
-            echo '<li> Income: '.$this->getIncome().'</li>';
+            echo '<li> Salary: '.$this->getSalary().'</li>';
+
 
             echo '</ul>';
         }

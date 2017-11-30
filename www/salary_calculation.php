@@ -3,7 +3,9 @@
     interface iCalculateSalary
     {
 
-        function calculateIncome();
+        function calculateSalary();
+
+        //function calculateCommission();
          
     }
 ?>
